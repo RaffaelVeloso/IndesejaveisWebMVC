@@ -45,9 +45,16 @@ Inside the View, the following two HTML Helper functions are used:-->
         @Html.LabelFor(Model => Model.im_vitrine)
         <!--Depois fazer algo pra buscar uma imagem da galeria quando tiver uma-->
         @Html.TextBoxFor(model => model.im_vitrine, new { type = "file", @class = "form-control" })
-        <span class="text-success">@Html.Raw(ViewBag.Message)</span>
+        <span class="text-success">@Html.Raw(ViewBag.MessageSucesso)</span>
+        <span class="text-danger">@Html.Raw(ViewBag.MessageErro)</span>
     </div>
 
+    <!--Nao precisa de AROBA na frente do if porque ja estamos dentro das tags do razor-->
+    if(ViewBag.MessageCadastroSucesso != null) {
+        <div class="alert alert-success" role="alert">
+            @Html.Raw(ViewBag.MessageCadastroSucesso)
+        </div>
+    }
     <br />
     <div class="float-right">
         <input type="reset" name="Limpar" id="Limpar" value=" Limpar " class="btn btn-warning" />

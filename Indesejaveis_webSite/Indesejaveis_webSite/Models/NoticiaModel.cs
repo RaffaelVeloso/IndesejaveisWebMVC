@@ -1,10 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Web;
 using System.ComponentModel.DataAnnotations;
-using System.Web.Mvc;
-using System.IO;
+using Microsoft.Web.Mvc;
 
 namespace Indesejaveis_webSite.Models
 {
@@ -23,7 +20,6 @@ namespace Indesejaveis_webSite.Models
         public String ds_noticia { get; set; }
 
         [Display(Name = "Imagem da Noticia: ")]
-        [RegularExpression(@"([a-zA-Z0-9\s_\\.\-:])+(.png|.jpg|.gif|.jepg)$", ErrorMessage = "Somente Imagens sao permitidas.")]
         public HttpPostedFileBase im_vitrine { get; set; }
 
         [Display(Name = "Tipos de Noticia: ")]
@@ -35,9 +31,10 @@ namespace Indesejaveis_webSite.Models
 
         public Int32 cod_imagem { get; set; }
     }
-    //Pra preencher o dropdown
+    //Pra preencher o dropdownlist
     public enum TipoNoticia
     {
         Novidade, Apresentação, Festival
     }
+
 }
