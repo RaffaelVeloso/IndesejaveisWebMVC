@@ -19,17 +19,25 @@ namespace Indesejaveis_webSite.Models
         [MaxLength(1000, ErrorMessage = "Numero maximo de caracters foi passado. (Max: 50)")]
         public String ds_noticia { get; set; }
 
+        //Poder pegar os parametros da imagem.
         [Display(Name = "Imagem da Noticia: ")]
         public HttpPostedFileBase im_vitrine { get; set; }
-
+        
         [Display(Name = "Tipos de Noticia: ")]
         //Se nao tiver um Required, ele usa uma mensagem automatica dizendo a obrigatoriedade do campo.
         [Required(ErrorMessage = "Selecione o tipo da noticia.")]
         public TipoNoticia ds_tipo_noticia { get; set; }
 
+        [Display(Name = "Data da Noticia: ")]
         public DateTime dat_noticia { get; set; }
 
         public Int32 cod_imagem { get; set; }
+
+        //Nome da imagem retornada da base.
+        public String nom_imagem { get; set; }
+
+        [Display(Name = "Tipos de Noticia: ")]
+        public String tipo_noticia_selected { get; set; }
     }
     //Pra preencher o dropdownlist
     public enum TipoNoticia

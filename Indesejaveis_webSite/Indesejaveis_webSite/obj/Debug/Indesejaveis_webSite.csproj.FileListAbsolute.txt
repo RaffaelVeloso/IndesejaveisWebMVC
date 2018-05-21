@@ -50,8 +50,8 @@ C:\Users\Helder\source\repos\IndesejaveisWebMVC.git\trunk\Indesejaveis_webSite\I
 C:\Users\Helder\source\repos\IndesejaveisWebMVC.git\trunk\Indesejaveis_webSite\Indesejaveis_webSite\bin\pt-br\System.Web.Webpages.Razor.resources.dll
 C:\Users\Helder\source\repos\IndesejaveisWebMVC.git\trunk\Indesejaveis_webSite\Indesejaveis_webSite\bin\pt-br\System.Web.Helpers.resources.dll
 C:\Users\Helder\source\repos\IndesejaveisWebMVC.git\trunk\Indesejaveis_webSite\Indesejaveis_webSite\bin\pt-br\System.Web.Mvc.resources.dll
-C:\Users\Helder\source\repos\IndesejaveisWebMVC.git\trunk\Indesejaveis_webSite\Indesejaveis_webSite\obj\Debug\Indesejaveis_webSite.csprojResolveAssemblyReference.cache
 C:\Users\Helder\source\repos\IndesejaveisWebMVC.git\trunk\Indesejaveis_webSite\Indesejaveis_webSite\obj\Debug\Indesejaveis_webSite.csproj.CoreCompileInputs.cache
 C:\Users\Helder\source\repos\IndesejaveisWebMVC.git\trunk\Indesejaveis_webSite\Indesejaveis_webSite\obj\Debug\Indesejaveis_webSite.dll
 C:\Users\Helder\source\repos\IndesejaveisWebMVC.git\trunk\Indesejaveis_webSite\Indesejaveis_webSite\obj\Debug\Indesejaveis_webSite.pdb
 C:\Users\Helder\source\repos\IndesejaveisWebMVC.git\trunk\Indesejaveis_webSite\Indesejaveis_webSite\bin\Microsoft.Web.Mvc.dll
+C:\Users\Helder\source\repos\IndesejaveisWebMVC.git\trunk\Indesejaveis_webSite\Indesejaveis_webSite\obj\Debug\Indesejaveis_webSite.csprojResolveAssemblyReference.cache

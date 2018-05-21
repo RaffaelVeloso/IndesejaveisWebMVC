@@ -14,6 +14,7 @@ Inside the View, the following two HTML Helper functions are used:-->
 <!--#endregion--> 
 @using (Html.BeginForm("CadastroNoticia", "Noticia", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
+    @Html.AntiForgeryToken()
     <br />
     <div class="h4 text-center">
         Cadastro de Noticia
@@ -64,3 +65,6 @@ Inside the View, the following two HTML Helper functions are used:-->
     <br /><br />
 }
 
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
