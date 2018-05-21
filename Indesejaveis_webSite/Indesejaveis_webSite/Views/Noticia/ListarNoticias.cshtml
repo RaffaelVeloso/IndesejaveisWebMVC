@@ -1,0 +1,53 @@
+﻿@model IEnumerable<Indesejaveis_webSite.Models.NoticiaModel>
+
+<p>
+    @Html.ActionLink("Criar Noticia", "CadastroNoticia")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.nom_titulo_noticia)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ds_noticia)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.dat_noticia)
+        </th>
+        @*<th>
+            @Html.DisplayNameFor(model => model.nom_imagem)
+        </th>*@
+        <th>
+            @Html.DisplayNameFor(model => model.tipo_noticia_selected)
+        </th>
+        <th>Ação</th>
+    </tr>
+
+@foreach (var item in Model) {
+    <!--Guardando o ID da noticia escolhida em um campo Hidden para passar no update e no delete.-->
+    @Html.HiddenFor(model => item.cod_noticia)
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.nom_titulo_noticia)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ds_noticia)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.dat_noticia)
+        </td>
+        @*<td>
+            @Html.DisplayFor(modelItem => item.nom_imagem)
+        </td>*@
+        <td>
+            @Html.DisplayFor(modelItem => item.tipo_noticia_selected)
+        </td>
+        <td>
+            <!--codNoticia e o mesmo nome passado no parametro da funcao UpNoticia, o mesmo vale para o delete-->
+            @Html.ActionLink("Alterar", "UpNoticia", new {  codNoticia = item.cod_noticia  }) |
+            @Html.ActionLink("Delete", "DeNoticia", new { codNoticia = item.cod_noticia  } , new { onclick = "return confirm('Tem certeza que deseja excluir esta noticia?');" })
+        </td>
+    </tr>
+}
+
+</table>
