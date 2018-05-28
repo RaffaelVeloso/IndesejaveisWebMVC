@@ -1,7 +1,7 @@
 ﻿@model Indesejaveis_webSite.Models.NoticiaModel
 @using Indesejaveis_webSite.Models
-
-@using (Html.BeginForm())
+<!--Passando o codNoticia pelo post (ULTRA CASE SENSITIVE, tem que escrever o Model certinho) para poder receber imagem no update, se nao da erro.-->
+@using (Html.BeginForm("UpNoticia", "Noticia", new { codNoticia = Model.cod_noticia }, FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
 
@@ -35,19 +35,19 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(Model => Model.im_vitrine)
+            @Html.LabelFor(model => model.im_vitrine)
             <!--Depois fazer algo pra buscar uma imagem da galeria quando tiver uma-->
             @Html.TextBoxFor(model => model.im_vitrine, new { type = "file", @class = "form-control" })
             <span class="text-success">@Html.Raw(ViewBag.MessageSucesso)</span>
             <span class="text-danger">@Html.Raw(ViewBag.MessageErro)</span>
         </div>
 
-        <div>
+        <div class="float-left">
             @Html.ActionLink("Voltar", "ListarNoticias", null, new { @class = "btn btn-warning" })
         </div>
 
         <div class="float-right">
-            <input type="submit" name="Cadastrar" id="Cadastrar" value=" Cadastrar " class="btn btn-primary" />
+            <input type="submit" name="Atualizar" id="Atualizar" value=" Atualizar " class="btn btn-primary" />
         </div>
     </div>
 }

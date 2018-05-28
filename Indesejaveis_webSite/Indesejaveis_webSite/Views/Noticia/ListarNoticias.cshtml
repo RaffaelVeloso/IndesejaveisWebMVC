@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<Indesejaveis_webSite.Models.NoticiaModel>
 
 <p>
-    @Html.ActionLink("Criar Noticia", "CadastroNoticia")
+    @Html.ActionLink("Criar Noticia", "InNoticia")
 </p>
 <table class="table">
     <tr>
@@ -14,9 +14,9 @@
         <th>
             @Html.DisplayNameFor(model => model.dat_noticia)
         </th>
-        @*<th>
+        <th>
             @Html.DisplayNameFor(model => model.nom_imagem)
-        </th>*@
+        </th>
         <th>
             @Html.DisplayNameFor(model => model.tipo_noticia_selected)
         </th>
@@ -36,9 +36,9 @@
         <td>
             @Html.DisplayFor(modelItem => item.dat_noticia)
         </td>
-        @*<td>
-            @Html.DisplayFor(modelItem => item.nom_imagem)
-        </td>*@
+        <td>
+            <img src ="C:/Users/Helder/source/repos/IndesejaveisWebMVC.git/trunk/Indesejaveis_webSite/Indesejaveis_webSite/ImagensVitrine/@Html.DisplayFor(modelItem => item.nom_imagem)" >
+        </td>
         <td>
             @Html.DisplayFor(modelItem => item.tipo_noticia_selected)
         </td>

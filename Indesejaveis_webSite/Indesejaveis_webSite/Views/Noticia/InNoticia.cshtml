@@ -1,0 +1,70 @@
+﻿@model Indesejaveis_webSite.Models.NoticiaModel
+@using Indesejaveis_webSite.Models
+
+@{
+    Layout = "~/Views/Shared/_LayoutPadrao.cshtml";
+}
+
+<!-- #region Explicacao metodo BeginForm -->
+    <!--ActionName – Nome da acao, no meu caso, InNoticia.
+ControllerName – Nome do controller, no meu caso, NoticiaCOntroller.
+FormMethod – Expecifica o metodo do form entre GET e POST, no meu caso POST.
+HtmlAttributes – This array allows to specify the additional Form Attributes. Here we need to specify enctype = “multipart/form-data” which is necessary for uploading Files.
+Inside the View, the following two HTML Helper functions are used:-->
+<!--#endregion--> 
+@using (Html.BeginForm("InNoticia", "Noticia", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    <br />
+    <div class="h4 text-center">
+        Cadastro de Noticia
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.nom_titulo_noticia)
+        @Html.TextBoxFor(model => model.nom_titulo_noticia, new { @class = "form-control", placeholder = "Digite o Titulo da Noticia Aqui." })
+        @Html.ValidationMessageFor(model => model.nom_titulo_noticia, String.Empty, new { @class = "text-danger" })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.ds_tipo_noticia)
+        @Html.DropDownListFor(model => model.ds_tipo_noticia, new SelectList(Enum.GetValues(typeof(TipoNoticia))),
+                    "Selecione...", new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.ds_tipo_noticia, String.Empty, new { @class = "text-danger" })
+    </div>
+
+    <div class="from-group">       
+        @Html.LabelFor(model => model.ds_noticia) 
+        <br />
+        <!--Lembrar que quando passei o ds_tipo_noticia na expressao lambda, ele comecou a adicionar o que estava na dropdown naquele momento-->
+        @Html.TextAreaFor(model => model.ds_noticia, new { @class = "form-control", placeholder = "Digite a noticia aqui..." })
+        @Html.ValidationMessageFor(model => model.ds_noticia, String.Empty, new { @class = "text-danger" })
+    </div>
+
+    <br />
+    <div class="form-group">
+        @Html.LabelFor(Model => Model.im_vitrine)
+        <!--Depois fazer algo pra buscar uma imagem da galeria quando tiver uma-->
+        @Html.TextBoxFor(model => model.im_vitrine, new { type = "file", @class = "form-control" })
+        <span class="text-success">@Html.Raw(ViewBag.MessageSucesso)</span>
+        <span class="text-danger">@Html.Raw(ViewBag.MessageErro)</span>
+    </div>
+
+    <!--Nao precisa de AROBA na frente do if porque ja estamos dentro das tags do razor-->
+    if(ViewBag.MessageCadastroSucesso != null) {
+        <div class="alert alert-success" role="alert">
+            @Html.Raw(ViewBag.MessageCadastroSucesso)
+        </div>
+    }
+    <br />
+    <div class="float-right">
+        <input type="reset" name="Limpar" id="Limpar" value=" Limpar " class="btn btn-warning" />
+        <span>&nbsp;</span>
+        <input type="submit" name="Cadastrar" id="Cadastrar" value=" Cadastrar " class="btn btn-primary" />
+    </div>
+    <br /><br />
+}
+
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>

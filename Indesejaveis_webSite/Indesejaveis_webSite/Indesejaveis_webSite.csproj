@@ -160,7 +160,7 @@
     <Content Include="Scripts\popper-utils.min.js.map" />
     <Content Include="Scripts\popper-utils.js.map" />
     <Content Include="Views\Shared\_LayoutPadrao.cshtml" />
-    <Content Include="Views\Noticia\CadastroNoticia.cshtml" />
+    <Content Include="Views\Noticia\InNoticia.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />

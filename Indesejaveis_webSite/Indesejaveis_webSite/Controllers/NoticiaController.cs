@@ -10,24 +10,42 @@ using Indesejaveis_webSite.Repository;
 namespace Indesejaveis_webSite.Controllers
 {
     /*
-     -Tentar passar imagem com c'odigo html quando for colocar descricao da imagem.
-     -Separar metodo de validar imagem para poder utilizar ele no update.
-         
+        OBS: os httppost sao os que a pagina chama.(eu acho kkkk)
+         - Colocar a imagem no listnoticias tamb'em.
          
          
          */
     public class NoticiaController : Controller
     {
         // GET: Noticia
-        public ActionResult CadastroNoticia()
-        {
-            return View();
-        }
+        //public ActionResult CadastroNoticia()
+        //{
+        //    return View();
+        //}
 
         private NoticiaRepository _repositorio;
 
-        [HttpPost]
-        public ActionResult CadastroNoticia(NoticiaModel noticia)
+        //[HttpPost]
+        //public ActionResult CadastroNoticia(NoticiaModel noticia)
+        //{
+        //    try
+        //    {
+        //        SalvarImagem(noticia);
+
+        //        //Chama o metodo que realiza o insert na base.
+        //        InNoticia(noticia);
+
+        //        return View();
+        //    }
+        //    catch (Exception e)
+        //    {
+        //        return View();
+        //    }
+
+        //}
+
+
+        public void SalvarImagem(NoticiaModel noticia)
         {
 
             string path = Server.MapPath("~/ImagensVitrine/");
@@ -36,6 +54,7 @@ namespace Indesejaveis_webSite.Controllers
                 Directory.CreateDirectory(path);
             }
 
+            //Tratar o erro de variavel tipo httpPostedFFileBase null
             var ImageNull = noticia.im_vitrine as HttpPostedFileBase;
 
             if (ImageNull == null)
@@ -53,10 +72,6 @@ namespace Indesejaveis_webSite.Controllers
                         break;
                 }
 
-                //Chama o metodo que realiza o insert na base.
-                InNoticia(noticia);
-
-                ViewBag.MessageCadastroSucesso += string.Format("Noticia Registrada com Sucesso.");
                 //Limpa os campos do formulario, precisa estar antes do View().
                 ModelState.Clear();
             }
@@ -81,11 +96,9 @@ namespace Indesejaveis_webSite.Controllers
 
                     noticia.nom_imagem = newFileName + "." + formatoImagem[1];
 
-                    //Chama o metodo que realiza o insert na base.
-                    InNoticia(noticia);
+                    //ViewBag.MessageSucesso += string.Format("<b>{0}</b> Sucesso ao subir a imagem.<br />", oldFileName);
+                    //ViewBag.MessageCadastroSucesso += string.Format("Noticia Registrada com Sucesso.");
 
-                    ViewBag.MessageSucesso += string.Format("<b>{0}</b> Sucesso ao subir a imagem.<br />", oldFileName);
-                    ViewBag.MessageCadastroSucesso += string.Format("Noticia Registrada com Sucesso.");
                     //Limpa os campos do formulario, precisa estar antes do View().
                     ModelState.Clear();
                 }
@@ -96,7 +109,28 @@ namespace Indesejaveis_webSite.Controllers
                     ViewBag.MessageErro += string.Format("Somente arquivos .jpeg .jpg .png .gif. com Resolucao Max 2mb 684x312.");
                 }
             }
-            return View();
+            //return View();
+        }
+
+        public void ExcluirImagem(NoticiaModel noticia)
+        {
+
+            var filePath = Server.MapPath("~/ImagensVitrine/" + noticia.nom_imagem);
+
+            FileInfo imagem = new FileInfo(filePath);
+
+            try
+            {
+                if (noticia.nom_imagem != "Apresentacao.jpg" || noticia.nom_imagem != "Festival.jpg" || noticia.nom_imagem != "Novidade.jpg")
+                {
+                    imagem.Delete();
+                }                
+            }
+            catch (Exception e)
+            {
+                ViewBag.Message("Erro ao deletar Imagem.");
+            }
+
         }
 
         public bool validarImagem(HttpPostedFileBase imagem)
@@ -156,9 +190,12 @@ namespace Indesejaveis_webSite.Controllers
                 {
                     _repositorio = new NoticiaRepository();
 
+                    //Esse metodo Que salva o nome da imagem(com mais um monte de validacoes)
+                    SalvarImagem(noticia);
+
                     if (_repositorio.InserirNoticia(noticia))
                     {
-                        ViewBag.Mesagem = "Noticia Cadastrada com Sucesso!";
+                        ViewBag.MessageCadastroSucesso = "Noticia Cadastrada com Sucesso!";
                     }
                 }
 
@@ -182,9 +219,21 @@ namespace Indesejaveis_webSite.Controllers
         {
             try
             {
-                _repositorio = new NoticiaRepository();
-                _repositorio.AtualizarNoticia(noticia);
-                return RedirectToAction("ListarNoticias");
+                if (ModelState.IsValid)
+                { 
+                    _repositorio = new NoticiaRepository();
+
+                    //Metodo para excluri imagem.
+                    ExcluirImagem(noticia);
+
+                    //Esse metodo Que salva o nome da imagem(com mais um monte de validacoes)
+                    SalvarImagem(noticia);
+
+                    _repositorio.AtualizarNoticia(noticia);
+
+                }
+
+                    return RedirectToAction("ListarNoticias");
             }
             catch (Exception e)
             {
@@ -197,10 +246,12 @@ namespace Indesejaveis_webSite.Controllers
             try
             {
                 _repositorio = new NoticiaRepository();
+
                 if(_repositorio.DeletarNoticia(codNoticia))
                 {
-                    ViewBag.Mesagem = "Noticia Cadastrada com Sucesso!";
+                    ViewBag.Mesagem = "Noticia Deletada com Sucesso!";
                 }
+
                 return RedirectToAction("ListarNoticias");
             }
             catch (Exception e)
